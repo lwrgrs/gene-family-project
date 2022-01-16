@@ -2,6 +2,8 @@ library(tidyverse)
 library(ggtree)
 library(tidytree)
 library(treeio)
+library(aplot)
+library(scales)
 
 setwd('~/Desktop/Calonectria_Projects/Gene_Families/Manuscript/R environments/')
 load('annotation_objects_1.16.22')
