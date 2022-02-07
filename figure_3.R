@@ -77,14 +77,16 @@ dot_cog <- cog_classified_ogs %>%
        color = "") +
   theme(axis.text.x = element_text(size = 9, color = "black"),
         axis.title.x = element_text(size = 11),
-        axis.text.y = element_text(size = 9, color = "black"),
+        axis.text.y = element_text(size = 9, 
+                                   color = "black",
+                                   face = 'italic'),
         axis.title.y = element_text(size = 11),
         legend.title = element_text(size = 10),
         legend.title.align = 0.5)
 
 # write to file
 setwd('~/Desktop/Calonectria_Projects/Gene_Families/Manuscript/Results/Figures/For_Submission/')
-pdf('Figure_3_cbf.pdf', width = 12, height = 7)
+pdf('Figure_3_cbf_v2.pdf', width = 12, height = 7)
 
 dot_cog
 

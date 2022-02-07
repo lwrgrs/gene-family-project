@@ -1,3 +1,5 @@
+rm(list=ls())
+
 library(tidyverse)
 library(aplot)
 
@@ -37,7 +39,7 @@ a_phi <- all_annot_bb %>%
         legend.position = "bottom",
         plot.title = element_text(hjust = 0.5),
         strip.text.y.left = element_text(angle = 0)) +
-  scale_fill_manual(values = c("#44AA99", "#CC6677", "#DDCC77", "#CC6677"),
+  scale_fill_manual(values = c("#44AA99", "#CC6677", "#88CCEE", "#CC6677"),
                     labels = c("E", "LOP",
                                "RV", 
                                "Not Annotated"))
@@ -71,13 +73,14 @@ b_phi <- t_counts %>%
         legend.title = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 45,
-                                   hjust = 1),
+                                   hjust = 1,
+                                   face = 'italic'),
         legend.position = "bottom") +
   scale_fill_manual(values = c("#888888", "#117733", "#332288"))
 
 # write figure 4 to file
 setwd('~/Desktop/Calonectria_Projects/Gene_Families/Manuscript/Results/Figures/For_Submission/')
-pdf('Figure_4_cbf.pdf',
+pdf('Figure_4_cbf_v2.pdf',
     width = 11,
     height = 8)
 
@@ -111,7 +114,7 @@ a_sig <- all_annot_bb %>%
   theme(legend.title = element_blank(),
         legend.position = "bottom",
         plot.title = element_text(hjust = 0.5)) +
-  scale_fill_manual(values = c("#44AA99", "#DDCC77"))
+  scale_fill_manual(values = c("#44AA99", "#CC99FF"))
 
 # panel B of figure 5
 b_sig <- t_counts %>%
@@ -142,13 +145,14 @@ b_sig <- t_counts %>%
         legend.title = element_blank(),
         axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 45,
-                                   hjust = 1),
+                                   hjust = 1,
+                                   face = 'italic'),
         legend.position = "bottom") +
   scale_fill_manual(values = c("#888888", "#117733", "#332288"))
 
 # write figure 5 to file
 setwd('~/Desktop/Calonectria_Projects/Gene_Families/Manuscript/Results/Figures/For_Submission/')
-pdf('Figure_5_cbf.pdf',
+pdf('Figure_5_cbf_v2.pdf',
     width = 11,
     height = 8)
 

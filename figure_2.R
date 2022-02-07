@@ -102,8 +102,7 @@ means$expanding[-c(9,24)] <- gsub("^", "\\+", means$expanding[-c(9,24)])
 d <- d %>%
   arrange(label) %>%
   mutate(mean_loss = means$contracting,
-         mean_gain = means$expanding) #%>%
-unite("gain_loss", c(mean_gain, mean_loss), sep = " \\ ")
+         mean_gain = means$expanding) #%>% unite("gain_loss", c(mean_gain, mean_loss), sep = " \\ ")
 
 d_long <- d %>%
   gather("Rapidly Expanding", 
@@ -120,7 +119,7 @@ d_long$total_change <- as.numeric(d_long$total_change)
 # ggtree plot
 t <- ggtree(tree, branch.length = 'none') %<+% d %<+% dat_fig + xlim(NA, 18) +
   geom_tiplab(aes(label = paste0('italic(', genus, 
-                                 ')~bolditalic(', species, ')~', isolate)), 
+                                 ')~italic(', species, ')~', isolate)), 
               parse = TRUE,
               hjust = -0.05) +
   geom_tippoint(aes(size = regfs), color = "#999999", alpha = 1/2) +
@@ -151,7 +150,7 @@ b1 %>% insert_left(t, width = 2)
 # write figure to file
 setwd('~/Desktop/Calonectria_Projects/Gene_Families/Manuscript/Results/Figures/For_Submission')
 
-pdf('Figure_2_cbf.pdf', width = 13, height = 7)
+pdf('Figure_2_cbf_v2.pdf', width = 13, height = 7)
 
 b1 %>% insert_left(t, width = 2)
 

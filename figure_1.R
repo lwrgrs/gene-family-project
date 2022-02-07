@@ -1,5 +1,6 @@
 library(tidyverse)
 library(cowplot)
+library(scales)
 
 setwd('~/Desktop/Calonectria_Projects/Gene_Families/Manuscript/R environments/')
 load('annotation_objects_1.16.22')
@@ -65,6 +66,14 @@ dat_means <-
   mutate(pct_rapid_ex = (n_expanding/(expns))*100,
          pct_rapid_co = (n_contracting/(contns))*100)
 
+dat_means_plot <- 
+  dat_means %>%
+  mutate(Expanding = (expns - n_expanding), Contracting = (contns - n_contracting), 
+         pct_rapid_ex, pct_rapid_co) %>%
+  select(species_id, Expanding, Contracting, n_expanding, n_contracting) %>%
+  gather("direction", "n_gfs", c(Expanding, Contracting, n_expanding, n_contracting)) %>%
+  mutate(n_gfs__ = ifelse(direction == "Expanding" | direction == "n_expanding", n_gfs, -1*n_gfs))
+
 break_values <- pretty(dat_means_plot$n_gfs__)
 
 dat_means_plot$direction <- reorder(dat_means_plot$direction, dat_means_plot$n_gfs__)
@@ -89,14 +98,15 @@ e <- dat_means_plot_ex %>%
            color = "black",
            position = "dodge") +
   scale_y_discrete(limits = rev) +
-  scale_x_continuous(limits = c(-250, 12000)) +
+  scale_x_continuous(limits = c(-250, 2000)) +
   scale_fill_manual(values = c("#332288", "#88CCEE"),
                     labels = c("Rapidly Expanding", "Total Expanding")) +
   xlab("Number of Gene Families") +
   ylab("Species") +
   theme(legend.position = 'right',
         axis.text.x = element_text(color = "black"),
-        axis.text.y = element_text(color = "black"),
+        axis.text.y = element_text(color = "black",
+                                   face = 'italic'),
         legend.title = element_blank()) +
   geom_text(aes(label=paste(round(pct_rapid_ex, 2), "%"), x=pct_rapid_ex),
             hjust = 1.15)
@@ -121,7 +131,7 @@ c <- dat_means_plot_co %>%
            color = "black",
            position = "dodge") +
   scale_y_discrete(limits = rev) +
-  scale_x_continuous(limits = c(-700, 12000)) +
+  scale_x_continuous(limits = c(-700, 7000)) +
   scale_fill_manual(values = c("#117733", "#999933"),
                     labels = c("Rapidly Contracting", "Total Contracting")) +
   xlab("Number of Gene Families") +
